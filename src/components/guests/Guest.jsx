@@ -28,7 +28,7 @@ const Guest = ({ guest }) => {
         <span
           className={
             `badge ` +
-            (dietary == "Non-Veg"
+            (dietary === "Non-Veg"
               ? "red"
               : dietary === "Vegan"
               ? "green"
