@@ -22,7 +22,7 @@ const GuestState = props => {
       },
       {
         id: 3,
-        name: "Milan Das",
+        name: "Gourango Das",
         phone: "24345 6677",
         dietary: "Pascatarian",
         isconfirmed: true
