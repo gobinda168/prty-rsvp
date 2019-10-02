@@ -7,7 +7,7 @@ import GuestState from "./context/guestContext/GuestState";
 function App() {
   return (
     <GuestState>
-      <div className="App">
+      <div>
         <p>hello thats all</p>
         <Navbar />
         <Home />
