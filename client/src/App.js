@@ -8,7 +8,6 @@ function App() {
     <div>
       <Navbar />
       <Home />
-      <p>Hello world</p>
     </div>
   );
 }
