@@ -7,7 +7,7 @@ const Guests = () => {
   return (
     <div className="guests">
       {guests.map(guest => (
-        <Guest key={guest.id} />
+        <Guest key={guest.id} guest={guest} />
       ))}
     </div>
   );

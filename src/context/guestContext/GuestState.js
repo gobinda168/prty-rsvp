@@ -16,14 +16,14 @@ const GuestState = props => {
         name: "Bhaskar Das",
         phone: "24345 6677",
         dietary: "Non-Veg",
-        isconfirmed: false
+        isconfirmed: true
       },
       {
         id: 3,
         name: "Milan Das",
         phone: "24345 6677",
         dietary: "Pascatarian",
-        isconfirmed: false
+        isconfirmed: true
       },
       {
         id: 4,
