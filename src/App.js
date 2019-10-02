@@ -8,7 +8,6 @@ function App() {
   return (
     <GuestState>
       <div>
-        <p>hello thats all</p>
         <Navbar />
         <Home />
       </div>
