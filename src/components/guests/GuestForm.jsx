@@ -1,12 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import GuestContext from "../../context/guestContext/guestContext";
 const GuestForm = () => {
-  const { addGuest } = useContext(GuestContext);
+  const { addGuest, editable, updateGuest, clearEdit } = useContext(
+    GuestContext
+  );
   const [guest, setGuest] = useState({
     name: "",
     phone: "",
     dietary: "Non-Veg"
   });
+  useEffect(() => {
+    if (editable !== null) {
+      setGuest(editable);
+    } else {
+      setGuest({
+        name: "",
+        phone: "",
+        dietary: "Non-Veg"
+      });
+    }
+  }, [editable]);
 
   const handleChange = e => {
     setGuest({
@@ -16,18 +29,25 @@ const GuestForm = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    addGuest(guest);
-    setGuest({
-      name: "",
-      phone: "",
-      dietary: "Non-Veg"
-    });
+    if (guest.name === "" || guest.phone === "")
+      return alert("Fields are empty!!");
+    if (editable !== null) {
+      updateGuest(guest);
+      clearEdit();
+    } else {
+      addGuest(guest);
+      setGuest({
+        name: "",
+        phone: "",
+        dietary: "Non-Veg"
+      });
+    }
   };
 
   const { name, phone, dietary } = guest;
   return (
     <div className="invite-section">
-      <h1>Invite Someone</h1>
+      <h1>{editable === null ? "Invite Someone" : "Edit Guest"}</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -63,6 +83,7 @@ const GuestForm = () => {
               name="dietary"
               value="Vegan"
               onChange={handleChange}
+              checked={dietary === "Vegan"}
             />
             <span className="checkmark"></span>
           </label>
@@ -71,13 +92,26 @@ const GuestForm = () => {
             <input
               type="radio"
               name="dietary"
-              value="Pesacatarian"
+              value="Pascatarian"
               onChange={handleChange}
+              checked={dietary === "Pascatarian"}
             />
             <span className="checkmark"></span>
           </label>
         </div>
-        <input type="submit" value="Add Guest" className="btn" />
+        <input
+          type="submit"
+          value={editable !== null ? "Edit Guest" : "Add Guest"}
+          className="btn"
+        />
+        {editable !== null ? (
+          <input
+            type="button"
+            value="cancel"
+            className="btn clear"
+            onClick={clearEdit}
+          />
+        ) : null}
       </form>
     </div>
   );

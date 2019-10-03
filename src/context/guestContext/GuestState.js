@@ -3,9 +3,19 @@ import GuestContext from "./guestContext";
 import guestReducer from "./guestReducer";
 import uuid from "uuid";
 
-import { TOGGLE_FILTER, SEARCH_GUEST, CLEAR_SEARCH, ADD_GUEST } from "../types";
+import {
+  TOGGLE_FILTER,
+  SEARCH_GUEST,
+  CLEAR_SEARCH,
+  ADD_GUEST,
+  REMOVE_GUEST,
+  UPDATE_GUEST,
+  CLEAR_EDIT,
+  EDIT_GUEST
+} from "../types";
 const GuestState = props => {
   const initialState = {
+    editable: null,
     search: null,
     filterGuest: false,
     guests: [
@@ -67,17 +77,40 @@ const GuestState = props => {
       payload: guest
     });
   };
+  const updateGuest = guest => {
+    dispatch({
+      type: UPDATE_GUEST,
+      payload: guest
+    });
+  };
+  const removeGuest = id => {
+    dispatch({
+      type: REMOVE_GUEST,
+      payload: id
+    });
+  };
+  const editGuest = guest => {
+    dispatch({ type: EDIT_GUEST, payload: guest });
+  };
+  const clearEdit = () => {
+    dispatch({ type: CLEAR_EDIT });
+  };
 
   return (
     <GuestContext.Provider
       value={{
         guests: state.guests,
+        editable: state.editable,
+        search: state.search,
         filterGuest: state.filterGuest,
         toggleFilter,
         searchGuest,
         clearSearch,
-        search: state.search,
-        addGuest
+        addGuest,
+        editGuest,
+        removeGuest,
+        updateGuest,
+        clearEdit
       }}
     >
       {props.children}
